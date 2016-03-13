@@ -1,5 +1,5 @@
 CC = g++
-CXXFLAGS ?= -g -std=c++0x -pedantic -Wall -Wextra -Wconversion -Wno-logical-op-parentheses
+CXXFLAGS ?= -g -std=c++0x -pedantic -Wall -Wextra -Wconversion
 SOURCES = pd.cc strategy.cc
 OBJECTS = $(SOURCES:.cc=.o)
 EXEC = pd

@@ -26,7 +26,8 @@ bool TFTT::move(const vb, const vb v) {
 }
 
 bool TTFT::move(const vb, const vb v) {
-  return v.size() > 1 && (v.back() || v[v.size()-2]) || !v.empty() && v.back();
+  return (v.size() > 1 && (v.back() || v[v.size()-2])) ||
+    (!v.empty() && v.back());
 }
 
 bool GRIM::move(const vb u, const vb v) {

@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdlib> // rand()
 #include <ctime> // time()
+#include <typeinfo> // typeid()
 
 #include "strategy.hh"
 
@@ -36,20 +37,20 @@ int main() {
   turn = (unsigned int)rand() % (MAX_TURN - MIN_TURN) + MIN_TURN;
 
   do {
-    printf("1: Round robin, %d-%d matches between each strategy\n", MIN_TURN, MAX_TURN);
-    printf("2: Single match, %d rounds\n", SINGLE);
+    printf("1: Round robin, %u-%u matches between each strategy\n", MIN_TURN, MAX_TURN);
+    printf("2: Single match, %u rounds\n", SINGLE);
     printf("0: Quit\n");
-    scanf("%d", &mode);
+    scanf("%u", &mode);
 
     switch (mode) {
     case 1:
       // Each strategy play against each other twice, itself once
       for (auto s: ss) for (auto t: ss) play(s, t, turn);
-      for (auto s: ss) printf( "%s %.4f\n", typeid(*s).name(), s->score/2.0/ss.size() );
+      for (auto s: ss) printf( "%s %.4lf\n", typeid(*s).name(), s->score/2.0/((double)ss.size()) );
       break;
     case 2:
       printf("Enter contestants: ");
-      unsigned int i, j; scanf("%d %d", &i, &j); play(ss.at(i), ss.at(j));
+      unsigned int i, j; scanf("%u %u", &i, &j); play(ss.at(i), ss.at(j));
     }
 
   } while (mode);
