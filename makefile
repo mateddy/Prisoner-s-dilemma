@@ -1,8 +1,8 @@
-CC = g++
-CXXFLAGS ?= -g -std=c++0x -pedantic -Wall -Wextra -Wconversion
-SOURCES = pd.cc strategy.cc
-OBJECTS = $(SOURCES:.cc=.o)
-EXEC = pd
+CC = gcc
+CFLAGS ?= -g -std=c99 -pedantic -Wall -Wextra -Wconversion
+SOURCES = match.c
+OBJECTS = $(SOURCES:.c=.o)
+EXEC = match
 
 all: $(EXEC)
 
