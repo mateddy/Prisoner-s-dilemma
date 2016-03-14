@@ -62,12 +62,12 @@ void play(int s, int t, double *score, int n_turn) {
 void qsor(int* p, double* score, int lo, int hi) {
   if (lo < hi) {
     double v = score[p[hi]];
-    int i = lo, j;
+    int i = lo, j, k;
     for (j = lo; j < hi; ++j) if (score[p[j]] <= v) {
-	if (i != j) p[i] ^= p[j] ^= p[i] ^= p[j];
+	if (i != j) { k = p[i]; p[i] = p[j]; p[j] = k; }
 	++i;
       }
-    if (i != hi) p[i] ^= p[hi] ^= p[i] ^= p[hi];
+    if (i != hi) { k = p[i]; p[i] = p[hi]; p[hi] = k; }
     qsor(p, score, lo, i-1);
     qsor(p, score, i+1, hi);
   }
@@ -84,7 +84,7 @@ int main() {
     //printf("1: Round robin, %u-%u turns between each strategy, %u times\n", MIN_TURN, MAX_TURN, M);
     printf("1: Round robin, ~%u turns between each strategy, %u times\n", TURN, M);
     printf("2: Single match, %u turns\n", M);
-    printf("0: Quit              Enter mode: "); scanf("%u", &mode);
+    printf("0: Quit              Enter mode: "); scanf("%d", &mode);
 
     switch (mode) {
     case 1:
@@ -105,7 +105,7 @@ int main() {
       for (s = 0; s < N; ++s) printf( "%s %.4lf\n", name[p[s]], score[p[s]]/((double) (N<<5)));
       break;
     case 2:
-      printf("Enter contestants: "); scanf("%u %u", &s, &t);
+      printf("Enter contestants: "); scanf("%d %d", &s, &t);
       printf( "%s %s\n", name[s], name[t]); play(s, t, score, M);
       break;
     }
